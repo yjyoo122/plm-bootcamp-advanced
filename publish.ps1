@@ -140,7 +140,7 @@ try {
         if (Test-Path -LiteralPath $ChangelogFile) {
             $clBytes = [System.IO.File]::ReadAllBytes($ChangelogFile)
             $cl      = [System.Text.Encoding]::UTF8.GetString($clBytes)
-            $entry   = "## Version $newVersion" + " - " + (Get-Date -Format 'yyyy-MM-dd') + "`n`n" + $entryNotes + "`n"
+            $entry   = "## Version $newVersion" + " - " + (Get-Date -Format 'yyyy-MM-dd') + "`n`n" + $entryNotes
             if ($cl.Contains($ChangelogMark)) {
                 $cl = $cl.Replace($ChangelogMark, "$ChangelogMark`n`n$entry")
                 [System.IO.File]::WriteAllBytes($ChangelogFile, $utf8NoBomEnc.GetBytes($cl))
