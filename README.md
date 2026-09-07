@@ -1,5 +1,9 @@
 # PLM Bootcamp — Advanced
 
+[![Version](https://img.shields.io/github/v/release/yjyoo122/plm-bootcamp-advanced?label=version&labelColor=1a1a1a&color=0696D7)](https://github.com/yjyoo122/plm-bootcamp-advanced/releases/latest)
+[![Last updated](https://img.shields.io/github/release-date/yjyoo122/plm-bootcamp-advanced?label=last%20updated&labelColor=1a1a1a&color=0696D7)](https://github.com/yjyoo122/plm-bootcamp-advanced/releases)
+[![Changelog](https://img.shields.io/badge/changelog-all%20versions-0696D7?labelColor=1a1a1a)](CHANGELOG.md)
+
 A hands-on build module for Autodesk **Fusion Manage** (PLM). You don't watch this one — you build alongside it.
 
 Over twelve chapters you construct a revision-controlled **Meeting Memos** workspace and wire up the mechanism that drives it: workspace relationships, lifecycle mappings, a workflow, precondition filters, and four kinds of script.
@@ -11,6 +15,19 @@ Over twelve chapters you construct a revision-controlled **Meeting Memos** works
 No install, no login, no download. Click and it runs in your browser.
 
 > **Do [Fundamentals](https://github.com/yjyoo122/plm-bootcamp-fundamentals) first.** This module assumes you already know what a workspace is and how a change process moves. → [Open Fundamentals](https://yjyoo122.github.io/plm-bootcamp-fundamentals/)
+
+## Version
+
+**This is Version 2.** The badge above always shows what is live right now — it reads straight from the latest release, so it can't go stale.
+
+- **What changed, version by version** → **[CHANGELOG.md](CHANGELOG.md)**
+- **Every release, with dates** → **[Releases](https://github.com/yjyoo122/plm-bootcamp-advanced/releases)**
+
+Already opened this before? Check the badge against the version you last ran. If it's higher, the module has been updated — hard-reload with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> to get the new one.
+
+The version goes up whenever the module itself is republished. README or facilitator-guide edits don't bump it.
+
+---
 
 ## Before you start — you need a tenant
 
@@ -144,13 +161,41 @@ It copies the file, re-applies the browser-tab title, commits, and pushes. Pages
 
 The script is **pinned to the Advanced filename on purpose** — the Fundamentals deck lives in the same source folder, and a "newest file wins" rule would publish the wrong deck.
 
+The script also handles the **version**, so you never have to think about it:
+
+1. reads `VERSION` (currently `2`) and bumps it to `3`
+2. adds a `## Version 3` entry to `CHANGELOG.md`
+3. tags the commit `v3` and publishes a **GitHub release** titled *Version 3*
+
+The README badge picks the new number up automatically — nothing else to edit.
+
+Give the release a real description instead of a timestamp:
+
+```powershell
+.\publish.ps1 -Notes "Reworked the scripting chapter; added precondition examples"
+```
+
+That one line becomes the commit subject, the changelog entry, and the release notes.
+
+| Switch | Effect |
+|---|---|
+| `-Notes "..."` | Text for the changelog entry and release notes. Use it. |
+| `-NoBump` | Publish without raising the version (typo fix in an already-released module) |
+| `-NoRelease` | Bump and tag, but skip creating the GitHub release page |
+
+Releases need the [GitHub CLI](https://cli.github.com/) (`gh`) signed in. Without it the script still bumps, tags and pushes — it just prints a link for creating the release by hand.
+
 Manually, if you prefer git:
 
 ```bash
 cd plm-bootcamp-advanced
 # replace index.html with the new build
-git commit -am "Update advanced module"
-git push
+echo 3 > VERSION            # bump it
+# add a "## Version 3" entry to CHANGELOG.md
+git commit -am "Version 3 - what changed"
+git tag -a v3 -m "Version 3"
+git push && git push origin v3
+gh release create v3 --title "Version 3" --notes "what changed"
 ```
 
 Or with no tools: repo page → `index.html` → pencil icon → upload. Works while the file stays under **25 MiB** (GitHub's browser upload limit); it is currently 8.9 MiB.

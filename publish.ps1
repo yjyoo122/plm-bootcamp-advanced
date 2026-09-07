@@ -24,12 +24,26 @@ param(
     [string]$SourceFile = "",
     [string]$Message    = "",
     [string]$SourceDir  = "C:\Users\yooy\OneDrive - Autodesk\Fusion Manage\Enablement materials\PLM BOOTCAMP",
-    [string]$SourceName = "PLM Technical Bootcamp - Advanced.html"
+    [string]$SourceName = "PLM Technical Bootcamp - Advanced.html",
+    [string]$Notes      = "",
+    [switch]$NoBump,
+    [switch]$NoRelease
 )
 
 $ErrorActionPreference = 'Stop'
 $RepoDir = $PSScriptRoot
 $LiveUrl = "https://yjyoo122.github.io/plm-bootcamp-advanced/"
+$RepoSlug      = "yjyoo122/plm-bootcamp-advanced"
+$VersionFile   = Join-Path $RepoDir 'VERSION'
+$ChangelogFile = Join-Path $RepoDir 'CHANGELOG.md'
+$ChangelogMark = '<!-- newest first -->'
+
+# --- current published version, read from the VERSION file (plain integer) ---
+$currentVersion = 0
+if (Test-Path -LiteralPath $VersionFile) {
+    $raw = (Get-Content -LiteralPath $VersionFile -Raw).Trim()
+    if ($raw -match '^\d+$') { $currentVersion = [int]$raw }
+}
 
 # --- the browser-tab title applied on every publish. Change this line to retitle. ---
 $TabTitle = "PLM Bootcamp - Advanced"
@@ -92,21 +106,64 @@ $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 Good "Wrote index.html"
 Say ""
 
-# ---------------------------------------------------------------- 3. commit + push
+# ---------------------------------------------------------------- 3. version, commit, tag, release
 Push-Location $RepoDir
 try {
     $dirty = git status --porcelain
     if ([string]::IsNullOrWhiteSpace($dirty)) {
         Say "No changes - the published version already matches this file."
-        Say "Nothing to do. Live at:"
+        Say "Nothing to do. This stays Version $currentVersion. Live at:"
         Say "  $LiveUrl"
         Say ""
         exit 0
     }
 
-    if ([string]::IsNullOrWhiteSpace($Message)) {
+    # A version bump means the module itself changed. Doc-only edits (README, notes)
+    # ride along on the current version instead of inventing a new one.
+    $deckDirty   = git status --porcelain -- index.html
+    $deckChanged = -not [string]::IsNullOrWhiteSpace($deckDirty)
+    $bump        = $deckChanged -and (-not $NoBump)
+    $newVersion  = if ($bump) { $currentVersion + 1 } else { $currentVersion }
+
+    # what goes in the changelog entry and the GitHub release body
+    $entryNotes = if (-not [string]::IsNullOrWhiteSpace($Notes))   { $Notes }
+                  elseif (-not [string]::IsNullOrWhiteSpace($Message)) { $Message }
+                  else { "Update advanced module." }
+
+    if ($bump) {
+        # --- VERSION file ---------------------------------------------------
+        $utf8NoBomEnc = New-Object System.Text.UTF8Encoding($false)
+        [System.IO.File]::WriteAllBytes($VersionFile, $utf8NoBomEnc.GetBytes("$newVersion`n"))
+        Good "VERSION bumped: $currentVersion -> $newVersion"
+
+        # --- CHANGELOG.md ---------------------------------------------------
+        if (Test-Path -LiteralPath $ChangelogFile) {
+            $clBytes = [System.IO.File]::ReadAllBytes($ChangelogFile)
+            $cl      = [System.Text.Encoding]::UTF8.GetString($clBytes)
+            $entry   = "## Version $newVersion" + " - " + (Get-Date -Format 'yyyy-MM-dd') + "`n`n" + $entryNotes + "`n"
+            if ($cl.Contains($ChangelogMark)) {
+                $cl = $cl.Replace($ChangelogMark, "$ChangelogMark`n`n$entry")
+                [System.IO.File]::WriteAllBytes($ChangelogFile, $utf8NoBomEnc.GetBytes($cl))
+                Good "CHANGELOG.md updated"
+            } else {
+                Warn "CHANGELOG marker '$ChangelogMark' not found - add the entry by hand."
+            }
+        } else {
+            Warn "CHANGELOG.md not found - skipped."
+        }
+
+        $Message = "Version $newVersion - $entryNotes"
+    }
+    elseif ([string]::IsNullOrWhiteSpace($Message)) {
         $Message = "Update advanced module - $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
     }
+
+    if (-not $bump) {
+        if ($NoBump)          { Say "-NoBump given: staying on Version $currentVersion." }
+        elseif (-not $deckChanged) { Say "index.html unchanged: staying on Version $currentVersion (docs-only update)." }
+        Say ""
+    }
+
 
     git add -A
     if (-not $?) { Die "git add failed." }
@@ -119,6 +176,38 @@ try {
     git push -q origin main
     if (-not $?) { Die "git push failed. Check your internet connection, then run this again." }
     Good "Pushed to GitHub"
+
+    # --- tag + GitHub release, so the repo page shows the version -----------
+    if ($bump) {
+        $tag = "v$newVersion"
+        $existing = git tag --list $tag
+        if ([string]::IsNullOrWhiteSpace($existing)) {
+            git tag -a $tag -m "Version $newVersion"
+            if (-not $?) { Warn "git tag failed - version not tagged." }
+        } else {
+            Warn "Tag $tag already exists locally - reusing it."
+        }
+
+        git push -q origin $tag
+        if ($LASTEXITCODE -eq 0) { Good "Tagged $tag" } else { Warn "Could not push tag $tag." }
+
+        if (-not $NoRelease) {
+            if (Get-Command gh -ErrorAction SilentlyContinue) {
+                $relOut = gh release create $tag --repo $RepoSlug --title "Version $newVersion" --notes $entryNotes
+                if ($LASTEXITCODE -eq 0) {
+                    Good "Published release: Version $newVersion"
+                    Say  "  $relOut"
+                } else {
+                    Warn "gh release create failed. Make one by hand at:"
+                    Warn "  https://github.com/$RepoSlug/releases/new?tag=$tag"
+                }
+            } else {
+                Warn "GitHub CLI (gh) not installed - tag pushed, but no release page created."
+                Warn "  Install from https://cli.github.com/ or create it at:"
+                Warn "  https://github.com/$RepoSlug/releases/new?tag=$tag"
+            }
+        }
+    }
 
     $gitMiB = [math]::Round(((Get-ChildItem "$RepoDir\.git" -Recurse -File -ErrorAction SilentlyContinue |
                 Measure-Object -Property Length -Sum).Sum / 1MB), 0)
@@ -136,6 +225,8 @@ finally { Pop-Location }
 
 Say ""
 Say "=== Done ==="
+Say ""
+Say "Published as: Version $newVersion"
 Say ""
 Say "GitHub Pages rebuilds in about a minute. Then it is live at:"
 Say "  $LiveUrl"
