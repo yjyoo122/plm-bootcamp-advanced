@@ -7,6 +7,10 @@ A version goes up when the **module itself** (`index.html`) changes. Edits to th
 
 <!-- newest first -->
 
+## Version 3 - 2026-09-30
+
+Update advanced module.
+
 ## Version 2 - 2026-09-01
 
 Module content update: revised build steps and screens.
