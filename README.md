@@ -1,8 +1,12 @@
 # PLM Bootcamp — Advanced
 
+**English** | [日本語](README.ja.md)
+
 [![Version](https://img.shields.io/github/v/release/yjyoo122/plm-bootcamp-advanced?label=version&labelColor=1a1a1a&color=0696D7)](https://github.com/yjyoo122/plm-bootcamp-advanced/releases/latest)
 [![Last updated](https://img.shields.io/github/release-date/yjyoo122/plm-bootcamp-advanced?label=last%20updated&labelColor=1a1a1a&color=0696D7)](https://github.com/yjyoo122/plm-bootcamp-advanced/releases)
 [![Changelog](https://img.shields.io/badge/changelog-all%20versions-0696D7?labelColor=1a1a1a)](CHANGELOG.md)
+![Editions](https://img.shields.io/badge/editions-Fusion%20connected%20%C2%B7%20Standalone-0696D7?labelColor=1a1a1a)
+![Languages](https://img.shields.io/badge/languages-English%20%C2%B7%20Japanese-0696D7?labelColor=1a1a1a)
 
 A hands-on build module for Autodesk **Fusion Manage** (PLM). You don't watch this one — you build alongside it.
 
@@ -10,15 +14,37 @@ Over twelve chapters you construct a revision-controlled **Meeting Memos** works
 
 ## ▶ Open the training
 
-### **https://yjyoo122.github.io/plm-bootcamp-advanced/**
+One module, **two editions** and **two languages**. Pick the link that matches your tenant and your room:
+
+| | English | 日本語 (Japanese) |
+|---|---|---|
+| **Fusion connected** — Fusion Manage with a Fusion hub | **[Open](https://yjyoo122.github.io/plm-bootcamp-advanced/)** | **[開く](https://yjyoo122.github.io/plm-bootcamp-advanced/?lang=ja)** |
+| **Standalone** — Fusion Manage on its own | **[Open](https://yjyoo122.github.io/plm-bootcamp-advanced/?ed=sa)** | **[開く](https://yjyoo122.github.io/plm-bootcamp-advanced/?lang=ja&ed=sa)** |
 
 No install, no login, no download. Click and it runs in your browser.
 
-> **Do [Fundamentals](https://github.com/yjyoo122/plm-bootcamp-fundamentals) first.** This module assumes you already know what a workspace is and how a change process moves. → [Open Fundamentals](https://yjyoo122.github.io/plm-bootcamp-fundamentals/)
+**You can switch inside the module, too.** The toolbar has a **Fusion connected | Standalone** toggle and an **English | 日本語** toggle (or press <kbd>E</kbd> and <kbd>L</kbd>). You stay on the same page, and the address bar updates, so a link you copy keeps your edition and language.
+
+### Which edition is mine?
+
+Open the ☰ menu in your tenant:
+
+| Your ☰ menu shows | Your edition | What changes in the module |
+|---|---|---|
+| **PLM Roles** and **PLM Settings** | **Fusion connected** | Roles are set up in Fusion Manage; groups and people are managed in the **Fusion hub** |
+| **Administration** (Workspace Manager · Security · System Configuration) | **Standalone** | Roles, groups and users are all managed in Fusion Manage, under **Administration › Security** |
+
+Everything else — the workspaces, the links, the workflow, the filters and the scripts — is the same build in both. The Standalone edition has a few extra pages for its own route and its groups (211 pages against 207).
+
+### The Japanese edition
+
+Every screen is in Japanese, written for a Japanese-speaking room rather than machine-translated. UI labels follow the **Japanese Fusion Manage UI** (checked against Autodesk's Japanese help and a Japanese tenant). The screenshots stay in English, so the first time a label appears on a page, its English wording from the screenshot is shown beside it. The names attendees type — Meeting Memos, MEETING_DATE and the rest — stay in English, exactly as in the screenshots, so every script runs unchanged.
+
+> **Do [Fundamentals](https://github.com/yjyoo122/plm-bootcamp-fundamentals) first.** This module assumes you already know what a workspace is and how a change process moves. → [Open Fundamentals](https://yjyoo122.github.io/plm-bootcamp-fundamentals/) (English)
 
 ## Version
 
-**This is Version 2.** The badge above always shows what is live right now — it reads straight from the latest release, so it can't go stale.
+The badge above always shows what is live right now — it reads straight from the latest release, so it can't go stale. Both editions and both languages are in the same file, so they always share one version.
 
 - **What changed, version by version** → **[CHANGELOG.md](CHANGELOG.md)**
 - **Every release, with dates** → **[Releases](https://github.com/yjyoo122/plm-bootcamp-advanced/releases)**
@@ -35,13 +61,13 @@ This is a build-along. The deck says it plainly:
 
 > …people who follow along in their own tenant get far more from it than the ones who watch.
 
-To get the value, you need **your own Fusion Manage tenant with administrator access**. Several steps configure tenant-level objects (roles, for instance, live alongside PLM Settings rather than inside it), so workspace-level permissions alone aren't enough.
+To get the value, you need **your own Fusion Manage tenant with administrator access**. Several steps configure tenant-level objects — roles, for instance, are set up in **PLM Roles** on a Fusion-connected tenant and under **Administration › Security** on a Standalone one — so workspace-level permissions alone aren't enough.
 
 You can still read it without a tenant — it works fine as reference material — but you won't build anything.
 
 ## Quick start
 
-1. Open the link above.
+1. Open your link from the table above.
 2. Press <kbd>F</kbd> for fullscreen.
 3. Press <kbd>→</kbd> or <kbd>space</kbd> to advance.
 4. Press <kbd>?</kbd> any time for the shortcut list.
@@ -57,14 +83,14 @@ Reading rather than being presented to? Press <kbd>P</kbd> for **Explore** mode 
 | **Account / login** | None to view the deck |
 | **To build along** | Fusion Manage tenant with admin access |
 | **Internet** | Only to load the page the first time |
-| **Screen** | 16:9 projector or laptop. A second screen helps — deck on one, tenant on the other |
+| **Screen** | Projector, monitor or laptop. Screenshots resize to fit the window, so nothing is cut off at laptop sizes. A second screen helps — deck on one, tenant on the other |
 
-Single self-contained HTML file, 8.9 MiB. All 120 images are embedded and nothing is fetched from a CDN, so once loaded it keeps working with the network off.
+Single self-contained HTML file, about 16 MiB, with both editions and both languages inside. All 178 screenshots and 13 diagrams are embedded and nothing is fetched from a CDN, so once loaded it keeps working with the network off.
 
 ## Running it offline
 
-1. Download **[index.html](https://raw.githubusercontent.com/yjyoo122/plm-bootcamp-advanced/main/index.html)** (right-click → Save link as…, ~9 MB)
-2. Double-click it. Opens in your browser and runs identically — no web server needed.
+1. Download **[index.html](https://raw.githubusercontent.com/yjyoo122/plm-bootcamp-advanced/main/index.html)** (right-click → Save link as…, ~17 MB)
+2. Double-click it. Opens in your browser and runs identically — no web server needed. It opens in English, Fusion connected; switch edition and language with the toolbar or <kbd>E</kbd> and <kbd>L</kbd>.
 
 ---
 
@@ -76,6 +102,8 @@ Single self-contained HTML file, 8.9 MiB. All 120 images are embedded and nothin
 |---|---|
 | ☰ | Chapter menu |
 | ⌂ | Back to the cover |
+| **Fusion connected \| Standalone** | Switch edition — same page |
+| **English \| 日本語** | Switch language — same page |
 | ← → | Back / forward |
 | **Notes** | Presenter notes for the current screen |
 | **Present / Explore** | Slide mode vs. scrollable-page mode |
@@ -93,11 +121,13 @@ Single self-contained HTML file, 8.9 MiB. All 120 images are embedded and nothin
 | <kbd>F</kbd> | Fullscreen |
 | <kbd>H</kbd> | Jump to cover |
 | <kbd>M</kbd> | Chapter menu |
+| <kbd>E</kbd> | Switch edition (Fusion connected / Standalone) |
+| <kbd>L</kbd> | Switch language (English / 日本語) |
 | <kbd>Esc</kbd> | Close menu, notes, or an enlarged image |
 
 Click any screenshot to enlarge it — worth doing often here, since most screens are configuration dialogs. <kbd>Esc</kbd> closes.
 
-> **Two notes.** <kbd>→</kbd> steps through a screen's callouts before moving on; if it seems stuck, it isn't. And the built-in shortcut card still lists <kbd>A</kbd> for basic/advanced — that toggle doesn't exist in this module. Ignore it.
+> **Note.** <kbd>→</kbd> steps through a screen's callouts before moving on; if it seems stuck, it isn't.
 
 ---
 
@@ -108,9 +138,9 @@ Click any screenshot to enlarge it — worth doing often here, since most screen
 | 1 | **Cover** | Title and host |
 | 2 | **The idea** | Two workspace types, one mechanism. Everything after this is scaffolding for the moment they connect |
 | 3 | **Meeting Memos** | The revision-controlled workspace — the thing under control. Holds the memo and every revision, and never moves itself |
-| 4 | **Access** | Roles carry permissions, groups carry people — and the two are configured in different products |
+| 4 | **Access** | Roles carry permissions, groups carry people. Fusion connected: roles in Fusion Manage, groups and people in the Fusion hub. Standalone: all three under Administration › Security |
 | 5 | **Memo Revision** | The revisioning workspace — the thing that moves. Carries the workflow; its Managed Items tab drives revisions on the other workspace |
-| 6 | **The two links** | A workspace relationship says *which* workspace may be revised; a lifecycle mapping says *which states* it may move to. Both required, **neither one warns you** |
+| 6 | **The two links** | A workspace relationship says *which* workspace may be revised; a lifecycle mapping says *which lifecycle transitions* it may apply. Both required, **neither one warns you** |
 | 7 | **Workflow** | States are places, transitions are moves. Two checkboxes in the state panel carry the whole behaviour |
 | 8 | **Preconditions** | A role picks the population; a precondition filter narrows it to the responsible person on that individual record — with no code |
 | 9 | **Scripts** | Four script types, each answering a different question at a different moment. Not four flavours of one thing |
@@ -122,33 +152,35 @@ Chapter 6 is where most builds break, and it fails silently. Chapter 12 gives yo
 
 ## Who this is for
 
-- **Administrators and implementers** — the core audience. Build it in your own tenant.
+- **Administrators and implementers** — the core audience. Build it in your own tenant, in your edition.
 - **Partners / pre-sales technical** — build it once so you can answer configuration questions without hedging.
+- **Japanese-speaking rooms** — use the 日本語 links. See [README.ja.md](README.ja.md) for the Japanese guide to this page.
 - **Facilitators** — read **[PRESENTING.md](PRESENTING.md)** first. This session needs more prep than Fundamentals does.
 - **End users** — you want [Fundamentals](https://yjyoo122.github.io/plm-bootcamp-fundamentals/) instead.
 
 ## The bootcamp series
 
-| Module | Audience | Link |
-|---|---|---|
-| **Fundamentals** | Everyone. Start here | [Open](https://yjyoo122.github.io/plm-bootcamp-fundamentals/) · [Repo](https://github.com/yjyoo122/plm-bootcamp-fundamentals) |
-| **Advanced** *(this one)* | Administrators, implementers | [Open](https://yjyoo122.github.io/plm-bootcamp-advanced/) |
+| Module | Audience | Editions · languages | Link |
+|---|---|---|---|
+| **Fundamentals** | Everyone. Start here | English | [Open](https://yjyoo122.github.io/plm-bootcamp-fundamentals/) · [Repo](https://github.com/yjyoo122/plm-bootcamp-fundamentals) |
+| **Advanced** *(this one)* | Administrators, implementers | Fusion connected · Standalone · English · 日本語 | [Open](https://yjyoo122.github.io/plm-bootcamp-advanced/) |
 
 ## Sharing it
 
-The link is public — anyone with it can open the module, no account needed. Because a browser must receive the whole file to display it, anyone viewing can also save a copy. Treat the content as shareable.
+The links are public — anyone with one can open the module, no account needed. Share the link for the audience's edition and language (the table at the top); each one is just the same page with `?ed=sa` and/or `?lang=ja` added. Because a browser must receive the whole file to display it, anyone viewing can also save a copy. Treat the content as shareable.
 
 ## Maintaining this module
 
 <details>
 <summary>For whoever owns the content</summary>
 
-All content lives in a single `DECK` array inside `index.html`; structure, styling, and behaviour are separate from it.
+All content lives inside `index.html`; structure, styling, and behaviour are separate from it.
 
-- **To edit content** — change `DECK` only.
-- **To translate** — translate `DECK` only. Japanese and Korean font fallbacks are already in the font stacks.
-- **Facilitator track** — `note` is the guidance, `say` is the spoken script. This module has 91 notes and 135 scripted screens.
+- **English content** lives in the `DECK` array. A screen marked `ed:"hub"` or `ed:"sa"` belongs to one edition; `sa:{…}` swaps words on a shared screen for Standalone.
+- **Japanese content** lives beside it, keyed by each screen's `id` (the `JA` table, plus tables for the toolbar, the WHERE bar, the rule strips and the diagrams). The Japanese is built from source files at build time — see the module spec before editing it by hand.
+- **Facilitator track** — `note` is the guidance, `say` is the spoken script. Fusion connected has 111 notes and 194 scripted screens; Standalone 114 and 198. Both languages carry both.
 - **Images** are base64 data URIs in the image registry, keyed by short name.
+- **The public links depend on `?ed=sa` and `?lang=ja`.** Keep those parameter names when the module changes, or every shared edition/language link breaks.
 
 ### Publishing a new version
 
@@ -163,9 +195,9 @@ The script is **pinned to the Advanced filename on purpose** — the Fundamental
 
 The script also handles the **version**, so you never have to think about it:
 
-1. reads `VERSION` (currently `2`) and bumps it to `3`
-2. adds a `## Version 3` entry to `CHANGELOG.md`
-3. tags the commit `v3` and publishes a **GitHub release** titled *Version 3*
+1. reads `VERSION` and bumps it by one
+2. adds a `## Version N` entry to `CHANGELOG.md`
+3. tags the commit `vN` and publishes a **GitHub release** titled *Version N*
 
 The README badge picks the new number up automatically — nothing else to edit.
 
@@ -185,27 +217,28 @@ That one line becomes the commit subject, the changelog entry, and the release n
 
 Releases need the [GitHub CLI](https://cli.github.com/) (`gh`) signed in. Without it the script still bumps, tags and pushes — it just prints a link for creating the release by hand.
 
-Manually, if you prefer git:
+Manually, if you prefer git (replace `N` with the next number):
 
 ```bash
 cd plm-bootcamp-advanced
 # replace index.html with the new build
-echo 3 > VERSION            # bump it
-# add a "## Version 3" entry to CHANGELOG.md
-git commit -am "Version 3 - what changed"
-git tag -a v3 -m "Version 3"
-git push && git push origin v3
-gh release create v3 --title "Version 3" --notes "what changed"
+echo N > VERSION            # bump it
+# add a "## Version N" entry to CHANGELOG.md
+git commit -am "Version N - what changed"
+git tag -a vN -m "Version N"
+git push && git push origin vN
+gh release create vN --title "Version N" --notes "what changed"
 ```
 
-Or with no tools: repo page → `index.html` → pencil icon → upload. Works while the file stays under **25 MiB** (GitHub's browser upload limit); it is currently 8.9 MiB.
+Or with no tools: repo page → `index.html` → pencil icon → upload. Works while the file stays under **25 MiB** (GitHub's browser upload limit); it is currently about 16 MiB.
 
 ### Things to know
 
 - **Browsers cache the page for 10 minutes.** Hard-reload with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> if you still see the old version.
-- **Every revision stores a full ~9 MB copy.** GitHub recommends staying under 1 GB, so roughly 110 updates of runway. The publish script warns you as you approach it.
+- **Every version is kept in the history.** Git stores only what changed between versions, so the whole history is still small (about 11 MB after five versions). GitHub recommends staying under 1 GB; the publish script warns you as you approach it.
 - **Don't rename the repository.** It changes the Pages URL and breaks every link already shared — `github.io` paths do not redirect.
-- The cover heading reads **"Build the mechanism"**, which is deliberate; only the browser-tab title is normalised to "PLM Bootcamp - Advanced". To change the cover, edit the deck source.
+- **README.md and README.ja.md go together.** When one changes, change the other.
+- The cover heading reads **"Build the mechanism"** in English and **「Fusion Manageの / ゼロから構築」** in Japanese, which is deliberate; only the browser-tab title is normalised to "PLM Bootcamp - Advanced". To change the cover, edit the deck source.
 
 </details>
 
